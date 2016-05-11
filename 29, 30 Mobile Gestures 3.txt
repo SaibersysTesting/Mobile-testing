@@ -1,0 +1,35 @@
+@Test
+	public void test() throws MalformedURLException, InterruptedException {
+		 File appDir = new File("src");
+		   
+		    File app = new File(appDir, "ApiDemos-debug.apk");
+
+		DesiredCapabilities cap=new DesiredCapabilities();
+		cap.setCapability(MobileCapabilityType.PLATFORM_NAME,MobilePlatform.ANDROID);
+		cap.setCapability(MobileCapabilityType.DEVICE_NAME, "Android Emulator");
+		
+		cap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, "200");
+		cap.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
+		AndroidDriver driver=new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),cap );
+		
+		System.out.println(driver.isLocked());//LOcked condition
+		System.out.println(driver.getContext());
+		List<WebElement> abc=driver.findElements(By.className("android.widget.TextView"));
+		
+		TouchAction t=new TouchAction(driver);
+		driver.islocked(); // if the emulator is locked it returns true if not false
+		System.out.println(driver.getcontext()); // context tells whether app open in web or native context
+		driver.install(""); // shows instllation
+		driver.close(); // close the app
+		driver.currentactivity(); // shows current activity
+		t.tap(abc.get(2)).perform(); // whenever you give touch action you must give perform for tap action
+		//TouchAction t1=new TouchAction(driver).longPress(el); // longpress to open a menu or delete etc
+		
+		
+		
+		//driver.installApp("");
+		driver.closeApp();
+		
+		//driver.currentActivity();
+		//driver.context(name)
+		//driver.zoom(el);

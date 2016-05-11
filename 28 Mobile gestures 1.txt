@@ -1,0 +1,28 @@
+@Test
+	public void test() throws MalformedURLException, InterruptedException {
+		 File appDir = new File("src");
+		   
+		    File app = new File(appDir, "bookMyShow.apk");
+
+		DesiredCapabilities cap=new DesiredCapabilities();
+		cap.setCapability(MobileCapabilityType.PLATFORM_NAME,MobilePlatform.ANDROID);
+		cap.setCapability(MobileCapabilityType.DEVICE_NAME, "Android Emulator");
+		
+		cap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, "200");
+		cap.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
+		AndroidDriver driver=new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),cap );
+		//com.bt.bms:id/btnNoThanks
+		Touchaction t = new Touchaction(driver); / argument must be driver for touch action
+		driver.findElementById("com.bt.bms:id/btnNoThanks").click();
+		driver.findElementById("com.bt.bms:id/dismiss").click();
+		MobileElement abc=(MobileElement)driver.findElement(By.className("android.widget.CheckedTextView")); // Use mobile element
+		abc.swipe(SwipeElementDirection.UP, 6000); // swiping screen for milliseconds
+	//	abc.tap(left, duration);
+		abc.zoom();
+		
+		
+		
+	
+		
+		
+	}
